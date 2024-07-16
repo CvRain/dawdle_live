@@ -12,21 +12,22 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 qt_standard_project_setup()
 
-aux_source_directory(src/component/. SRC_COMPONENT)
 aux_source_directory(src/model/. SRC_MODEL)
 aux_source_directory(src/service/. SRC_SERVICE)
 aux_source_directory(src/theme/. SRC_THEME)
 aux_source_directory(src/utils/. SRC_UTILS)
 aux_source_directory(src/. SRC_CPP)
+aux_source_directory(src/tray_icon/. SRC_TRAY_ICON)
 
-set(SRC ${SRC_COMPONENT}
+set(SRC
         ${SRC_MODEL}
         ${SRC_SERVICE}
         ${SRC_THEME}
         ${SRC_UTILS}
-        ${SRC_CPP})
+        ${SRC_CPP}
+        ${SRC_TRAY_ICON})
 
-set(RES)
+set(RES res.qrc)
 
 qt_add_executable(appdawdle_live
         ${SRC}
@@ -36,10 +37,13 @@ qt_policy(
         SET QTP0001 NEW
 )
 
+set(QMLS ui/Main.qml)
+
 qt_add_qml_module(appdawdle_live
         URI dawdle_live
         VERSION 1.0
-        QML_FILES ui/Main.qml
+        QML_FILES ${QMLS}
+        RESOURCES ${RES}
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

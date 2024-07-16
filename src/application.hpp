@@ -4,11 +4,10 @@
 
 #pragma once
 
-#include <QGuiApplication>
+#include <QApplication>
 #include <QQmlApplicationEngine>
 
-#include "component/tray_icon.hpp"
-
+#include "tray_icon/tray_icon_manager.hpp"
 
 class Application final {
 public:
@@ -16,8 +15,9 @@ public:
     static int exec();
 protected:
     void init();
+    void loadMenu();
 private:
-    QGuiApplication app;
+    QApplication application;
     QQmlApplicationEngine engine;
-    component::TrayIcon trayIcon{};
+    tray_icon::TrayIconManager trayIconManager{};
 };
